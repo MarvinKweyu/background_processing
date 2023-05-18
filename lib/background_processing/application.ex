@@ -16,10 +16,12 @@ defmodule BackgroundProcessing.Application do
       {Phoenix.PubSub, name: BackgroundProcessing.PubSub},
       # Start Finch
       {Finch, name: BackgroundProcessing.Finch},
+      {Oban, Application.fetch_env!(:background_processing, Oban)},
       # Start the Endpoint (http/https)
       BackgroundProcessingWeb.Endpoint
       # Start a worker by calling: BackgroundProcessing.Worker.start_link(arg)
       # {BackgroundProcessing.Worker, arg}
+
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

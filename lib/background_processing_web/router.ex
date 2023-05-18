@@ -18,6 +18,12 @@ defmodule BackgroundProcessingWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/subscribers", SubscriberLive.Index, :index
+    live "/subscribers/new", SubscriberLive.Index, :new
+    live "/subscribers/:id/edit", SubscriberLive.Index, :edit
+
+    live "/subscribers/:id", SubscriberLive.Show, :show
+    live "/subscribers/:id/show/edit", SubscriberLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
