@@ -2,7 +2,7 @@ defmodule BackgroundProcessing.Newsletter do
   @moduledoc """
   The Newsletter context.
   """
-
+  import Swoosh.Email
   import Ecto.Query, warn: false
   alias BackgroundProcessing.Repo
 
@@ -100,5 +100,14 @@ defmodule BackgroundProcessing.Newsletter do
   """
   def change_subscriber(%Subscriber{} = subscriber, attrs \\ %{}) do
     Subscriber.changeset(subscriber, attrs)
+  end
+
+  def welcome(user) do
+    new()
+    |> to({user.name, user.email})
+    |> from({"Dr B Banner", "hulk.smash@example.com"})
+    |> subject("Hello, Avengers!")
+    |> html_body("<h1>Hello #{user.name}</h1>")
+    |> text_body("Hello #{user.name}\n")
   end
 end
